@@ -8,70 +8,71 @@ import userModel from "@/app/models/user";
 import { error } from "console";
 
 export const authOptions: NextAuthOptions = {
-    providers: [
-        CredentialsProvider({
-            id: "credentials",
-            name: 'Credentials',
-            credentials: {
-                email: { label: "Email", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" }
-            },
+  providers: [
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
 
-            async authorize(credentials: any): Promise<any> {
-                await dbConnect()
-                try {
-                    const user = await userModel.findOne({
-                        $or: [{ email: credentials.identifier }, { username: credentials.identifier }]
-                    })
-                    if (!user) {
-                        throw new Error('no user found with email')
-                    }
-                    if (!user.isVarified) {
-                        throw new Error('Please veryfid User')
-                    }
-                    const isPassword = await bcrypt.compare(credentials.password, user.password)
-                    if (isPassword) {
-                        return user
-                    } else {
-                        throw new Error('not valid user')
-                    }
-                } catch (error: any) {
-                    throw new Error(error)
-
-                }
-
-
-            }
-
-        })
-    ], callbacks: {
-
-        async jwt({ user, token, }) {
-            if (user) {
-                token._id = user._id?.toString()
-                token.isVarified = user.isVarified;
-                token.isAcceptingMessage = user.isAcceptingMessage;
-                token.username = user.username;
-            }
-            return token
-        }, async session({ session, token, }) {
-            if (token) {
-                session.user._id = token._id;
-                session.user.isVarified = token.isVarified;
-                session.user.isAcceptingMessage = token.isAcceptingMessage;
-                session.user.username = token.username;
-
-            }
-
-            return session
-        },
-    }, pages: {
-        signIn: '/sign-in'
-
-    }, session: {
-        strategy: "jwt"
+      async authorize(credentials: any): Promise<any> {
+        await dbConnect();
+        try {
+          const user = await userModel.findOne({
+            $or: [
+              { email: credentials.identifier },
+              { username: credentials.identifier },
+            ],
+          });
+          if (!user) {
+            throw new Error("no user found with email");
+          }
+          if (!user.isVerified) {
+            throw new Error("Please veryfid User");
+          }
+          const isPassword = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+          if (isPassword) {
+            return user;
+          } else {
+            throw new Error("not valid user");
+          }
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      },
+    }),
+  ],
+  callbacks: {
+    async jwt({ user, token }) {
+      if (user) {
+        token._id = user._id?.toString();
+        token.isVerified = user.isVerified;
+        token.isAcceptingMessage = user.isAcceptingMessage;
+        token.username = user.username;
+      }
+      return token;
     },
-    secret: process.env.NEXTAUTH_SECRET_KEY
-}
+    async session({ session, token }) {
+      if (token) {
+        session.user._id = token._id;
+        session.user.isVerified = token.isVerified;
+        session.user.isAcceptingMessage = token.isAcceptingMessage;
+        session.user.username = token.username;
+      }
 
-
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/sign-in",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET_KEY,
+};

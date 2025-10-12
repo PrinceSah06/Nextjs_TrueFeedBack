@@ -23,7 +23,7 @@ export interface User extends Document {
   password: string;
   verifyCode: string;
   verifyCodeExpiry: Date;
-  isVarified:boolean;
+  isVerified: boolean;
   isAcceptingMessage: boolean;
   message: Message[];
 }
@@ -40,32 +40,33 @@ const UserSehema: Schema<User> = new Schema({
     required: [true, "email is required"],
     trim: true,
     unique: true,
-    match:[/.+\@.+\..+/,"Please use a valid email address"]
+    match: [/.+\@.+\..+/, "Please use a valid email address"],
   },
   password: {
     type: String,
-    required: [true,"password is required"]
+    required: [true, "password is required"],
   },
   verifyCode: {
     type: String,
-    required: [true,"varifycode is required"]
+    required: [true, "varifycode is required"],
   },
   verifyCodeExpiry: {
     type: Date,
- required: [true,"code Expirey  is required"]
+    required: [true, "code Expirey  is required"],
   },
-  isVarified:{
-    type:Boolean,
-    required:[true,'isvarified is required ']
-
+  isVerified: {
+    type: Boolean,
+    required: [true, "isVerifiedis required "],
   },
   isAcceptingMessage: {
     type: Boolean,
     required: true,
   },
-    message:[MessageSehema]
+  message: [MessageSehema],
 });
 
-const userModel = (mongoose.models.User as mongoose.Model<User> || mongoose.model<User>("User",UserSehema))
+const userModel =
+  (mongoose.models.User as mongoose.Model<User>) ||
+  mongoose.model<User>("User", UserSehema);
 
 export default userModel;

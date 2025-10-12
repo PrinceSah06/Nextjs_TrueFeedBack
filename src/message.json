@@ -1,0 +1,22 @@
+[
+  { "title": "message for user1",  "content": "Hey, are you available for a quick call?",            "receved": "just now" },
+  { "title": "message for user2",  "content": "Sent the report — please review.",                   "receved": "1 min ago" },
+  { "title": "message for user3",  "content": "Lunch today?",                                       "receved": "3 mins ago" },
+  { "title": "message for user4",  "content": "Reminder: project deadline tomorrow.",               "receved": "10 min ago" },
+  { "title": "message for user5",  "content": "Can you share the design files?",                   "receved": "20 min ago" },
+  { "title": "message for user6",  "content": "All tests passed on CI.",                           "receved": "30 min ago" },
+  { "title": "message for user7",  "content": "Please approve the PR when you have time.",         "receved": "45 min ago" },
+  { "title": "message for user8",  "content": "Meeting rescheduled to 3 PM.",                       "receved": "1 hour ago" },
+  { "title": "message for user9",  "content": "Thanks for your help earlier!",                      "receved": "2 hours ago" },
+  { "title": "message for user10", "content": "Can we push the release to Friday?",                 "receved": "3 hours ago" },
+  { "title": "message for user11", "content": "I've uploaded the latest build.",                    "receved": "6 hours ago" },
+  { "title": "message for user12", "content": "Anyone free for a pairing session?",                 "receved": "yesterday" },
+  { "title": "message for user13", "content": "Notes from the retro are in the doc.",               "receved": "2 days ago" },
+  { "title": "message for user14", "content": "Please update your timesheet.",                      "receved": "3 days ago" },
+  { "title": "message for user15", "content": "Security scan found 2 warnings.",                    "receved": "last week" },
+  { "title": "message for user16", "content": "Welcome the new team member!",                       "receved": "2 weeks ago" },
+  { "title": "message for user17", "content": "Draft of the blog post is ready for review.",       "receved": "on Sep 30" },
+  { "title": "message for user18", "content": "Invoice paid — thank you.",                          "receved": "on Aug 05" },
+  { "title": "message for user19", "content": "Happy New Year!",                                    "receved": "on Jan 01" },
+  { "title": "message for user20", "content": "Follow-up: did you see my last message?",           "receved": "4 mins ago" }
+]
